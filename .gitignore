@@ -1,0 +1,6 @@
+src/main/resources/inputs/
+target
+.settings
+.project
+.idea
+.classpath
