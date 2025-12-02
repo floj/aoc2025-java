@@ -15,4 +15,12 @@ public class PuzzleInput {
 			return br.readAllLines();
 		}
 	}
+
+	public static String readString(String resource) throws IOException {
+		try (var rin = PuzzleInput.class.getResourceAsStream(resource);
+				var isr = new InputStreamReader(rin, StandardCharsets.UTF_8);
+				var br = new BufferedReader(isr)) {
+			return br.readAllAsString();
+		}
+	}
 }
