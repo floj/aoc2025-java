@@ -37,19 +37,18 @@ public record BatteryPack(int[] cells, String line) {
     var pos = 0;
 
     var remaining = activateCells;
-    while (remaining > 0) {
-      var searchCharge = 9;
+    var searchCharge = 9;
 
-      while (searchCharge > 0 && remaining > 0) {
-        var i = indexOf(pos, searchCharge);
-        if (i >= 0 && i <= cells.length - remaining) {
-          pos = i + 1;
-          max = max * 10 + searchCharge;
-          remaining--;
-          break;
-        }
-        searchCharge--;
+    while (searchCharge > 0 && remaining > 0) {
+      var i = indexOf(pos, searchCharge);
+      if (i >= 0 && i <= cells.length - remaining) {
+        pos = i + 1;
+        max = max * 10 + searchCharge;
+        remaining--;
+        searchCharge = 9;
+        continue;
       }
+      searchCharge--;
     }
 
     return max;
