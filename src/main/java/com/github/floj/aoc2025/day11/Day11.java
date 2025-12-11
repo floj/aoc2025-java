@@ -18,11 +18,11 @@ public class Day11 {
     var bays =
         lines.stream().map(Patchbay::parse).collect(Collectors.toMap(Patchbay::name, b -> b));
 
-    var paths = bays.get("you").sumPathTo("out", bays);
+    var paths = bays.get("you").countPathToDest("out", bays, new TreeSet<>());
     System.out.println("path from you to out: " + paths);
 
     var via = new TreeSet<>(Set.of("dac", "fft"));
-    var pathsVia = bays.get("svr").sumPathToOutVia("out", bays, via);
+    var pathsVia = bays.get("svr").countPathToDest("out", bays, via);
     System.out.println("path from svr to out via " + via + ": " + pathsVia);
   }
 }

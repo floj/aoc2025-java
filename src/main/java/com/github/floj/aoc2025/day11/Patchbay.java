@@ -33,18 +33,7 @@ public class Patchbay {
     return name;
   }
 
-  int sumPathTo(String dest, Map<String, Patchbay> bays) {
-    if (outlets.contains(dest)) {
-      return 1;
-    }
-    var sum = 0;
-    for (var o : outlets) {
-      sum += bays.get(o).sumPathTo(dest, bays);
-    }
-    return sum;
-  }
-
-  long sumPathToOutVia(String dest, Map<String, Patchbay> bays, SortedSet<String> wants) {
+  long countPathToDest(String dest, Map<String, Patchbay> bays, SortedSet<String> wants) {
     if (wants.contains(name)) {
       wants = new TreeSet<>(wants);
       wants.remove(name);
@@ -62,7 +51,7 @@ public class Patchbay {
     }
     var sum = 0L;
     for (var o : outlets) {
-      sum += bays.get(o).sumPathToOutVia(dest, bays, wants);
+      sum += bays.get(o).countPathToDest(dest, bays, wants);
     }
     cache.put(wants.toString(), sum);
     return sum;
